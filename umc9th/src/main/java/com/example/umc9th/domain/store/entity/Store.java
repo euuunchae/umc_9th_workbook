@@ -6,6 +6,7 @@ import com.example.umc9th.domain.store.enums.StoreType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Store {
     private String address;
 
     @Column(name = "score", nullable = false)
-    private Long score;
+    private BigDecimal score;
 
     @Column(name = "open")
     private LocalTime open;
