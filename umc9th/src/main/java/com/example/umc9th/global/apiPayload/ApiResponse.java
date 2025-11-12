@@ -24,7 +24,7 @@ public class ApiResponse<T> {
     @JsonProperty("result")
     private T result;
 
-    // 성공한 경우 (result 포함) - 일단 응답 통일해야 할 것 같아서 똑같이 해는데,,, 걍 status랑 message만 잇어도 되지 않을까..?
+    // 성공한 경우 (result 포함)
     public static <T> ApiResponse<T> onSuccess(BaseSuccessCode code, T result) {
         return new ApiResponse<>(true, code.getCode(), code.getMessage(), result);
     }

@@ -1,7 +1,6 @@
 package com.example.umc9th.domain.test.converter;
 
 import com.example.umc9th.domain.test.dto.TestResDTO;
-import org.springframework.http.HttpStatus;
 
 public class TestConverter {
 
