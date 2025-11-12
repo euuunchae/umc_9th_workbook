@@ -18,28 +18,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewQueryService {
 
-    private final ReviewRepository reviewRepository;
-
-    public List<Review> searchMyReviews(String query, String type) {
-
-        // Q 클래스 정의
-        QReview review = QReview.review;
-
-        // BooleanBuilder 정의
-        BooleanBuilder builder = new BooleanBuilder();
-
-        // 동적 쿼리 : 검색 조건
-        if (type.equals("store")) {
-            builder.and(review.store.name.contains(query));
-        }
-
-        if (type.equals("score")) {
-            builder.and(review.score.goe(Float.parseFloat(query)));
-        }
-
-        List<Review> reviewList = reviewRepository.searchMyReviews(builder);
-
-        return reviewList;
-    }
+//    private final ReviewRepository reviewRepository;
+//
+//    public List<Review> searchMyReviews(String query, String type) {
+//
+//        // Q 클래스 정의
+//        QReview review = QReview.review;
+//
+//        // BooleanBuilder 정의
+//        BooleanBuilder builder = new BooleanBuilder();
+//
+//        // 동적 쿼리 : 검색 조건
+//        if (type.equals("store")) {
+//            builder.and(review.store.name.contains(query));
+//        }
+//
+//        if (type.equals("score")) {
+//            builder.and(review.score.goe(Float.parseFloat(query)));
+//        }
+//
+//        List<Review> reviewList = reviewRepository.searchMyReviews(builder);
+//
+//        return reviewList;
+//    }
 
 }
