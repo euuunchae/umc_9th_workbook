@@ -15,6 +15,7 @@ public class ReviewResDTO {
     @Getter
     public static class ReviewResponseDTO {
         private Long reviewId;
+        private Long memberId;
         private String content;
         private BigDecimal score;
 
