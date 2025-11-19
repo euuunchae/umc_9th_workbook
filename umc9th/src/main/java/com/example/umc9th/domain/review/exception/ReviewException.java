@@ -1,7 +1,10 @@
 package com.example.umc9th.domain.review.exception;
 
-public class ReviewException extends RuntimeException {
-    public ReviewException(String message) {
-        super(message);
+import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
+import com.example.umc9th.global.apiPayload.exception.GeneralException;
+
+public class ReviewException extends GeneralException {
+    public ReviewException(BaseErrorCode code) {
+        super(code);
     }
 }

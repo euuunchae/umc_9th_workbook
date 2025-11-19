@@ -1,4 +1,4 @@
-package com.example.umc9th.domain.member.exception.code;
+package com.example.umc9th.domain.store.exception.code;
 
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
 import lombok.AllArgsConstructor;
@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum MemberErrorCode implements BaseErrorCode {
+public enum StoreErrorCode implements BaseErrorCode {
 
-    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND,
-            "MEMBER400_1",
-            "존재하지 않는 사용자입니다.");
+    STORE_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "STORE400_1",
+            "존재하지 않는 가게입니다.");
 
     private final HttpStatus status;
     private final String code;

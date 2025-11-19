@@ -28,8 +28,8 @@ public class ReviewConverter {
         return ReviewResDTO.ReviewResponseDTO.builder()
                 .reviewId(review.getId())
                 .memberId(review.getMember().getId())
-                .content(review.getContent())
                 .score(review.getScore())
+                .content(review.getContent())
                 .build();
     }
 

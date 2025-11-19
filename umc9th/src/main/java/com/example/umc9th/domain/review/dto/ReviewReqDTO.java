@@ -10,7 +10,7 @@ public class ReviewReqDTO {
     @Builder
     @Getter
     public static class ReviewRequestDTO {
-        String Content;
+        String content;
         BigDecimal score;
     }
 }

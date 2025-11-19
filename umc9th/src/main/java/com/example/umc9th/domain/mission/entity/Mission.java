@@ -6,6 +6,7 @@ import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Mission extends BaseEntity {
     private Long point;
 
     @Column(name = "deadline", nullable = false)
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.REMOVE)
     private List<MemberMission> memberMissionList = new ArrayList<>();

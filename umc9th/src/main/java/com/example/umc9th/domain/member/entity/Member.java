@@ -2,6 +2,7 @@ package com.example.umc9th.domain.member.entity;
 
 import com.example.umc9th.domain.member.entity.mapping.MemberFood;
 import com.example.umc9th.domain.member.entity.mapping.MemberTerm;
+import com.example.umc9th.domain.member.enums.Address;
 import com.example.umc9th.domain.member.enums.Gender;
 import com.example.umc9th.domain.member.enums.Social;
 import com.example.umc9th.domain.member.enums.MemberStatus;
@@ -10,8 +11,8 @@ import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -35,10 +36,15 @@ public class Member extends BaseEntity {
     private Gender gender = Gender.NONE;
 
     @Column(name = "birth", nullable = false)
-    private Date birth;
+    private LocalDate birth;
 
-    @Column(name = "address", length = 50, nullable = false)
-    private String address;
+    @Column(name = "address", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Address address = Address.서울특별시;
+
+    @Column(name = "detailAddress", length = 50, nullable = false)
+    private String detailAddress;
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
@@ -47,18 +53,22 @@ public class Member extends BaseEntity {
     private String phone;
 
     @Column(name = "point", nullable = false)
-    private Integer point;
+    @Builder.Default
+    private Integer point = 0;
 
     @Column(name = "social", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Social social;
 
     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<MemberTerm> memberTermList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<MemberFood> memberFoodList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
