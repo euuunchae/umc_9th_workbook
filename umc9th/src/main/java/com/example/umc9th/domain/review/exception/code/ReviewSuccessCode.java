@@ -15,7 +15,7 @@ public enum ReviewSuccessCode implements BaseSuccessCode {
 
     CREATE_REVIEW_OK(HttpStatus.OK,
             "REVIEW200_2",
-            "리뷰 작성 완료!! ><");
+            "리뷰 작성이 완료되었습니다.");
 
     private final HttpStatus status;
     private final String code;

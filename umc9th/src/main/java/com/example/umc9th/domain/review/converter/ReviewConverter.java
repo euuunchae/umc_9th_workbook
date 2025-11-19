@@ -38,8 +38,8 @@ public class ReviewConverter {
     public static Review toReview(Store store, Member member, ReviewReqDTO.ReviewRequestDTO dto){
         return Review.builder()
                 .member(member)
-                .content(dto.getContent())
-                .score(dto.getScore())
+                .content(dto.content())
+                .score(dto.score())
                 .store(store)
                 .build();
     }
