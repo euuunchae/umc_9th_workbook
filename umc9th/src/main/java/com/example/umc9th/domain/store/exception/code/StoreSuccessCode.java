@@ -12,7 +12,12 @@ public enum StoreSuccessCode implements BaseSuccessCode {
 
     ADD_MISSION_OK(HttpStatus.OK,
             "STORE200_1",
-            "미션 추가가 완료되었습니다.");
+            "미션 추가가 완료되었습니다."),
+
+    ADD_STORE_OK(HttpStatus.OK,
+            "STORE200_2",
+            "가게 추가가 완료되었습니다.");
+
 
     private final HttpStatus status;
     private final String code;
