@@ -41,6 +41,9 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
         return ReviewConverter.toReviewPreviewListDTO(result);
     }
 
+    /**
+     * 9주차 - 1. 내 리뷰 목록 조회하기
+     */
     @Override
     public ReviewResDTO.ReviewPreViewListDTO findMyReviewByStoreName(String memberName, String storeName, Integer page) {
 
@@ -52,7 +55,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
                 .orElseThrow(() -> new StoreException(StoreErrorCode.STORE_NOT_FOUND));
 
         // 가게와 사용자에 맞는 리뷰를 가져온다
-        PageRequest pageRequest = PageRequest.of(page, 5);
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
         Page<Review> reviews = reviewRepository.findAllByMemberAndStore(member, store, pageRequest);
 
         // 결과물을 응답 DTO 로 변환한다

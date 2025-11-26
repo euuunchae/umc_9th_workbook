@@ -7,17 +7,18 @@ import com.example.umc9th.domain.review.repository.ReviewRepository;
 import com.example.umc9th.domain.review.service.command.ReviewCommandService;
 import com.example.umc9th.domain.review.service.query.ReviewQueryServiceImpl;
 import com.example.umc9th.domain.store.repository.StoreRepository;
+import com.example.umc9th.global.annotation.InvalidPageNum;
 import com.example.umc9th.global.apiPayload.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class ReviewController {
 
     private final ReviewQueryServiceImpl reviewQueryService;
@@ -74,7 +75,7 @@ public class ReviewController {
      * 9주차 - 1. 내가 작성한 리뷰 목록 조회하기
      */
     @Operation(
-            summary = "내가 작성한 리뷰 목록 조회 API",
+            summary = "9주차 1. 내가 작성한 리뷰 목록 조회 API",
             description = "특정 사용자가 작성한 모든 리뷰를 조회합니다. 페이지네이션으로 제공합니다."
     )
     @ApiResponses({
@@ -85,7 +86,7 @@ public class ReviewController {
     public ApiResponse<ReviewResDTO.ReviewPreViewListDTO> getMyReviews(
             @RequestParam(defaultValue = "김홍익") String memberName,
             @RequestParam String storeName,
-            @RequestParam(defaultValue = "1") Integer page
+            @InvalidPageNum @RequestParam(defaultValue = "1") Integer page
     ){
 
         ReviewSuccessCode code = ReviewSuccessCode.FIND_REVIEW_OK;

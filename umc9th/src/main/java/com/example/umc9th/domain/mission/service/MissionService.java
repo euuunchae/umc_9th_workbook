@@ -30,7 +30,7 @@ public class MissionService {
                 .orElseThrow(() -> new StoreException(StoreErrorCode.STORE_NOT_FOUND));
 
         // 미션 목록 조회하기
-        PageRequest pageRequest = PageRequest.of(page, 10);
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
         Page<Mission> missions = missionRepository.findByStoreOrderByDeadlineAsc(store, pageRequest);
 
         return MissionConverter.toMissionPreViewListDTO(missions);

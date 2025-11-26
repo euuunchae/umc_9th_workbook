@@ -55,7 +55,7 @@ public class MemberMissionService {
         Member member = getUser(memberId);
 
         // 사용자의 미션 찾기
-        PageRequest pageRequest = PageRequest.of(page, 10);
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
         Page<MemberMission> memberMissions = memberMissionRepository.findByMemberAndStatus(member, status, pageRequest);
 
         return MissionConverter.toMemberMissionPreViewDTOList(memberMissions);

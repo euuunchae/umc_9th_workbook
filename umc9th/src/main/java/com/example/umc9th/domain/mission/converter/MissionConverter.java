@@ -28,7 +28,7 @@ public class MissionConverter {
                 )
                 .listSize(result.getSize())
                 .totalPage(result.getTotalPages())
-                .pageNumber(result.getNumber())  // 현재 페이지 번호
+                .pageNumber(result.getNumber() + 1)  // 현재 페이지 번호
                 .totalElements(result.getTotalElements())
                 .isFirst(result.isFirst())
                 .isLast(result.isLast())
@@ -54,7 +54,7 @@ public class MissionConverter {
                 )
                 .listSize(result.getSize())
                 .totalPage(result.getTotalPages())
-                .pageNumber(result.getNumber())  // 현재 페이지 번호
+                .pageNumber(result.getNumber() + 1)  // 현재 페이지 번호
                 .totalElements(result.getTotalElements())
                 .isFirst(result.isFirst())
                 .isLast(result.isLast())

@@ -10,14 +10,17 @@ import com.example.umc9th.domain.mission.service.MemberMissionService;
 import com.example.umc9th.domain.mission.service.MissionService;
 import com.example.umc9th.domain.review.dto.ReviewResDTO;
 import com.example.umc9th.domain.review.exception.code.ReviewSuccessCode;
+import com.example.umc9th.global.annotation.InvalidPageNum;
 import com.example.umc9th.global.apiPayload.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class MissionController {
 
     private final MemberMissionService memberMissionService;
@@ -46,7 +49,7 @@ public class MissionController {
     @GetMapping("/stores/{storeId}/missions")
     public ApiResponse<MissionResDTO.MissionPreViewListDTO> getMissionsByStore(
             @PathVariable Long storeId,
-            @RequestParam(defaultValue = "1") Integer page
+            @InvalidPageNum @RequestParam(defaultValue = "1") Integer page
     ) {
 
         return ApiResponse.onSuccess(MissionSuccessCode.FIND_MISSION_OK, missionService.getMissionByStore(storeId, page) );
@@ -70,7 +73,7 @@ public class MissionController {
     public ApiResponse<MemberMissionResDTO.MemberMissionPreViewListDTO> getProgressingMission(
             @PathVariable Long memberId,
             @RequestParam(defaultValue = "PROGRESS") MissionStatus status,
-            @RequestParam(defaultValue = "1") Integer page
+            @InvalidPageNum @RequestParam(defaultValue = "1") Integer page
     ) {
 
         return ApiResponse.onSuccess(MissionSuccessCode.FIND_MISSION_OK, memberMissionService.getMemberMissionByMissionStatus(memberId, status, page));

@@ -4,9 +4,11 @@ import com.example.umc9th.global.apiPayload.ApiResponse;
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
 import com.example.umc9th.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc9th.global.apiPayload.exception.GeneralException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -36,7 +38,7 @@ public class GeneralExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ApiResponse<Map<String, String>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        // 검새에 실패한 필드와 그에 대한 메시지를 저장하는 Map
+        // 검사에 실패한 필드와 그에 대한 메시지를 저장하는 Map
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage()));
@@ -46,4 +48,12 @@ public class GeneralExceptionAdvice {
         // 에러 코드, 메시지와 함께 errors 를 반환
         return ResponseEntity.status(code.getStatus()).body(errorResponse);
     }
+
+    @ExceptionHandler(ConstraintViolationException.class) //ConstraintViolationException 을 발생시키는 예외를 처리하는 핸들러
+    public ResponseEntity<ApiResponse<String>> handleConstraintViolation(ConstraintViolationException ex) {
+        BaseErrorCode code = GeneralErrorCode.VALID_FAIL;
+        return ResponseEntity.status(code.getStatus())
+                .body(ApiResponse.onFailure(code, ex.getMessage()));
+    }
+
 }
