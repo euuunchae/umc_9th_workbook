@@ -26,7 +26,7 @@ public class Review extends BaseEntity {
     private String content;
 
     @Column(name = "score", nullable = false)
-    private BigDecimal score;
+    private Float score;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();

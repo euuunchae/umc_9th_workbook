@@ -3,7 +3,8 @@ package com.example.umc9th.domain.review.dto;
 
 import lombok.Builder;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class ReviewResDTO {
 
@@ -12,6 +13,25 @@ public class ReviewResDTO {
          Long reviewId,
          Long memberId,
          String content,
-         BigDecimal score
+         Float score
     ){}
+
+    @Builder
+    public record ReviewPreViewListDTO(
+            List<ReviewPreViewDTO> reviewList,
+            Integer listSize,
+            Integer totalPage,
+            Long totalElements,
+            Boolean isFirst,
+            Boolean isLast
+    ) {}
+
+    @Builder
+    public record ReviewPreViewDTO(
+            String ownerNickname,
+            Float score,
+            String body,
+            LocalDateTime createdAt
+    ) {}
+
 }

@@ -10,7 +10,11 @@ import org.springframework.http.HttpStatus;
 public enum MissionErrorCode implements BaseErrorCode {
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND,
             "MISSION400_1",
-            "존재하지 않는 미션입니다.");
+            "존재하지 않는 미션입니다."),
+
+    MEMBER_MISSION_NOT_FOUND(HttpStatus.NOT_FOUND,
+            "MEMBER_MISSION400_2",
+            "존재하지 않는 사용자 미션입니다.");
 
     private final HttpStatus status;
     private final String code;

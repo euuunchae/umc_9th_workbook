@@ -14,6 +14,8 @@ import com.example.umc9th.domain.mission.exception.code.MissionErrorCode;
 import com.example.umc9th.domain.mission.repository.MemberMissionRepository;
 import com.example.umc9th.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,40 @@ public class MemberMissionService {
         return MissionConverter.toStartMissionResDTO(memberMission);
     }
 
+
+    /**
+     * 9주차 - 3. 특정 사용자의 미션 목록 조회하기
+     */
+    public MemberMissionResDTO.MemberMissionPreViewListDTO getMemberMissionByMissionStatus(Long memberId, MissionStatus status, Integer page) {
+
+        // 사용자 찾기
+        Member member = getUser(memberId);
+
+        // 사용자의 미션 찾기
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        Page<MemberMission> memberMissions = memberMissionRepository.findByMemberAndStatus(member, status, pageRequest);
+
+        return MissionConverter.toMemberMissionPreViewDTOList(memberMissions);
+    }
+
+    /**
+     * 9주차 - 4. 미션 진행 완료로 변경하기
+     */
+    @Transactional
+    public MemberMissionResDTO.CompleteMissionResDTO completeMemberMission(Long memberMissionId) {
+
+        // 사용자의 미션 찾기
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId)
+                .orElseThrow(()->new MissionException(MissionErrorCode.MEMBER_MISSION_NOT_FOUND));
+
+        // 미션 완료 상태 변경하기
+        memberMission.updateMissionStatus(MissionStatus.COMPLETE);
+
+        return MissionConverter.toCompleteMissionResDTO(memberMission);
+
+    }
+
+
     private Member getUser(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(()->new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
@@ -52,4 +88,6 @@ public class MemberMissionService {
         return missionRepository.findById(missionId)
                 .orElseThrow(()->new MissionException(MissionErrorCode.MISSION_NOT_FOUND));
     }
+
+
 }

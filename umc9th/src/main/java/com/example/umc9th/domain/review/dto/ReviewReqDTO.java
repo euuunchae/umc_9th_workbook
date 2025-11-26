@@ -9,5 +9,5 @@ public class ReviewReqDTO {
     @Builder
     public record ReviewRequestDTO(
         String content,
-        BigDecimal score){}
+        Float score){}
 }
