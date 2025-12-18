@@ -2,10 +2,7 @@ package com.example.umc9th.domain.member.entity;
 
 import com.example.umc9th.domain.member.entity.mapping.MemberFood;
 import com.example.umc9th.domain.member.entity.mapping.MemberTerm;
-import com.example.umc9th.domain.member.enums.Address;
-import com.example.umc9th.domain.member.enums.Gender;
-import com.example.umc9th.domain.member.enums.Social;
-import com.example.umc9th.domain.member.enums.MemberStatus;
+import com.example.umc9th.domain.member.enums.*;
 import com.example.umc9th.domain.mission.entity.mapping.MemberMission;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -46,8 +43,14 @@ public class Member extends BaseEntity {
     @Column(name = "detailAddress", length = 50, nullable = false)
     private String detailAddress;
 
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "phone", length = 15)
     private String phone;
@@ -56,11 +59,11 @@ public class Member extends BaseEntity {
     @Builder.Default
     private Integer point = 0;
 
-    @Column(name = "social", nullable = false)
+    @Column(name = "social")
     @Enumerated(EnumType.STRING)
     private Social social;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
